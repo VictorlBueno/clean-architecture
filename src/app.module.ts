@@ -8,5 +8,6 @@ import {EnvConfigModule} from "./shared/infrastructure/env-config/env-config.mod
     controllers: [AppController],
     providers: [AppService],
 })
+
 export class AppModule {
 }
