@@ -9,7 +9,7 @@ export abstract class InMemoryRepository<E extends Entity> implements Repository
         await this._get(id);
 
         const index = this.items.findIndex(item => item._id === id);
-        this.items.slice(index, 1);
+        this.items.splice(index, 1);
     }
 
     async findAll(): Promise<E[]> {
@@ -36,7 +36,7 @@ export abstract class InMemoryRepository<E extends Entity> implements Repository
         const entity = this.items.find((item) => item._id === _id);
 
         if (!entity) {
-            throw new NotFoundError("Entity not found.");
+            throw new NotFoundError("Entity not found");
         }
 
         return entity;
