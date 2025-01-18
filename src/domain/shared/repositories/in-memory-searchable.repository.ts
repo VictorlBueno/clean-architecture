@@ -5,6 +5,8 @@ import {SearchableRepositoryInterface, SearchParams, SearchResult} from "./searc
 export abstract class InMemorySearchableRepository<E extends Entity>
     extends InMemoryRepository<E>
     implements SearchableRepositoryInterface<E, any, any> {
+    sortableFields: string[] = [];
+
     async search(props: SearchParams): Promise<SearchResult<E>> {
         const itemsFiltered = await this.applyFilter(this.items, props.filter);
         const itemsSorted = await this.applySort(itemsFiltered, props.sort, props.sortDir);
@@ -23,7 +25,23 @@ export abstract class InMemorySearchableRepository<E extends Entity>
 
     protected abstract applyFilter(items: E[], filter: string | null): Promise<E[]>;
 
-    protected abstract applySort(items: E[], sort: string | null, sortDir: string | null): Promise<E[]>;
+    protected async applySort(items: E[], sort: string | null, sortDir: string | null): Promise<E[]> {
+        if (!sort || !this.sortableFields.includes(sort)) {
+            return items;
+        }
+
+        return [...items].sort((a, b) => {
+            if (a.props[sort] < b.props[sort]) {
+                return sortDir === "asc" ? -1 : 1;
+            }
+
+            if (a.props[sort] > b.props[sort]) {
+                return sortDir === "asc" ? 1 : -1;
+            }
+
+            return 0;
+        });
+    };
 
     protected abstract applyPaginate(items: E[], page: SearchParams["page"], perPage: SearchParams["perPage"]): Promise<E[]>;
 }
