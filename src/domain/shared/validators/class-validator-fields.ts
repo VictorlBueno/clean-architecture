@@ -1,4 +1,4 @@
-import {FieldsError, ValidatorFieldsInterface} from "@/domain/validators/validator-fields.interface";
+import {FieldsError, ValidatorFieldsInterface} from "@/domain/shared/validators/validator-fields.interface";
 import {validateSync} from "class-validator";
 
 export abstract class ClassValidatorFields<PropsValidated> implements ValidatorFieldsInterface<PropsValidated> {

@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {EnvConfig} from "@/shared/infrastructure/env-config/env-config.interface";
+import {EnvConfig} from "@/infrastructure/config/env/env-config.interface";
 import {ConfigService} from "@nestjs/config";
 
 @Injectable()

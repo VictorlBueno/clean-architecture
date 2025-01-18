@@ -1,4 +1,6 @@
-import {Entity} from "@/domain/entities/shared.entity";
+import {Entity} from "@/domain/shared/entities/entity";
+import {UserValidatorFactory} from "@/domain/validators/user.validator";
+import {EntityValidationError} from "@/domain/shared/errors/validation-errors";
 
 export type UserProps = {
     name: string
@@ -9,39 +11,49 @@ export type UserProps = {
 
 export class UserEntity extends Entity<UserProps> {
     constructor(public readonly props: UserProps, id?: string) {
-        super(props, id)
-        this.props.createdAt = this.props.createdAt ?? new Date()
-    }
-
-    update(value: string): void {
-        this.name = value
-    }
-
-    updatePassword(value: string): void {
-        this.password = value
+        UserEntity.validate(props);
+        super(props, id);
+        this.props.createdAt = this.props.createdAt ?? new Date();
     }
 
     get name() {
-        return this.props.name
+        return this.props.name;
     }
 
     private set name(value: string) {
-        this.props.name = value
+        this.props.name = value;
     }
 
     get email() {
-        return this.props.email
+        return this.props.email;
     }
 
     get password() {
-        return this.props.password
+        return this.props.password;
     }
 
     private set password(value: string) {
-        this.props.password = value
+        this.props.password = value;
     }
 
     get createdAt() {
-        return this.props.createdAt
+        return this.props.createdAt;
+    }
+
+    static validate(props: UserProps) {
+        const validator = UserValidatorFactory.create();
+        const isValid = validator.validate(props);
+
+        if (!isValid) throw new EntityValidationError(validator.errors);
+    }
+
+    update(value: string): void {
+        UserEntity.validate({...this.props, name: value});
+        this.name = value;
+    }
+
+    updatePassword(value: string): void {
+        UserEntity.validate({...this.props, name: value});
+        this.password = value;
     }
 }
