@@ -1,51 +1,47 @@
 import {Entity} from "@/domain/entities/shared.entity";
 
 export type UserProps = {
-    name: string;
-    email: string;
-    password: string;
-    createdAt?: Date;
+    name: string
+    email: string
+    password: string
+    createdAt?: Date
 }
 
 export class UserEntity extends Entity<UserProps> {
     constructor(public readonly props: UserProps, id?: string) {
-        super(props, id);
-        this.props.createdAt = this.props.createdAt ?? new Date();
+        super(props, id)
+        this.props.createdAt = this.props.createdAt ?? new Date()
     }
 
-    updateName(value: string): void {
-        this.name = value;
+    update(value: string): void {
+        this.name = value
     }
 
     updatePassword(value: string): void {
-        this.name = value;
+        this.password = value
     }
 
-    getName() {
-        return this.props.name;
+    get name() {
+        return this.props.name
     }
 
-    setName(value: string): void {
-        this.props.name = value;
+    private set name(value: string) {
+        this.props.name = value
     }
 
-    getEmail() {
-        return this.props.email;
+    get email() {
+        return this.props.email
     }
 
-    setEmail(value: string): void {
-        this.props.email = value;
+    get password() {
+        return this.props.password
     }
 
-    getPassword() {
-        return this.props.password;
+    private set password(value: string) {
+        this.props.password = value
     }
 
-    setPassword(value: string): void {
-        this.props.password = value;
-    }
-
-    getCreatedAt() {
-        return this.props.createdAt ?? new Date();
+    get createdAt() {
+        return this.props.createdAt
     }
 }
