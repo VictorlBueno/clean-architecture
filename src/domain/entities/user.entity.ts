@@ -13,16 +13,36 @@ export class UserEntity extends Entity<UserProps> {
         this.props.createdAt = this.props.createdAt ?? new Date();
     }
 
+    updateName(value: string): void {
+        this.name = value;
+    }
+
+    updatePassword(value: string): void {
+        this.name = value;
+    }
+
     getName() {
         return this.props.name;
+    }
+
+    setName(value: string): void {
+        this.props.name = value;
     }
 
     getEmail() {
         return this.props.email;
     }
 
+    setEmail(value: string): void {
+        this.props.email = value;
+    }
+
     getPassword() {
         return this.props.password;
+    }
+
+    setPassword(value: string): void {
+        this.props.password = value;
     }
 
     getCreatedAt() {
