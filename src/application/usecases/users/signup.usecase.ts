@@ -1,4 +1,4 @@
-import {BadRequestError} from "@/application/errors/bad-request-error";
+import {BadRequestError} from "@/application/shared/errors/bad-request-error";
 import {UserRepository} from "@/domain/repositories/user.repository";
 import {UserEntity} from "@/domain/entities/user.entity";
 import {HashProvider} from "@/application/shared/providers/hash-provider";

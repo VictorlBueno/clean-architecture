@@ -5,7 +5,7 @@ import {HashProvider} from "@/application/shared/providers/hash-provider";
 import {BcryptjsHashProvider} from "@/infrastructure/providers/hash-provider/bcryptjs-hash.provider";
 import {SignupUseCase} from "@/application/usecases/users/signup.usecase";
 import {UserDataBuilder} from "@/domain/testing/helpers/user-data-builder";
-import {BadRequestError} from "@/application/errors/bad-request-error";
+import {BadRequestError} from "@/application/shared/errors/bad-request-error";
 import {ConflictError} from "@/domain/shared/errors/conflict-error";
 
 describe("SignupUseCase unit tests", () => {

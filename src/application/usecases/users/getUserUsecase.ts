@@ -2,7 +2,7 @@ import {UserRepository} from "@/domain/repositories/user.repository";
 import {UserOutput} from "@/application/dtos/users/user-output";
 import {UseCase as DefaultUseCase} from "@/application/shared/usecases/use-case";
 
-export namespace GetuserUsecase {
+export namespace GetUserUsecase {
     export type Input = {
         id: string;
     }
