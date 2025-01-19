@@ -2,6 +2,7 @@ import {BadRequestError} from "@/application/errors/bad-request-error";
 import {UserRepository} from "@/domain/repositories/user.repository";
 import {UserEntity} from "@/domain/entities/user.entity";
 import {HashProvider} from "@/application/shared/providers/hash-provider";
+import {UserOutput} from "@/application/dtos/users/user-output";
 
 export namespace SignupUseCase {
     export type Input = {
@@ -10,13 +11,7 @@ export namespace SignupUseCase {
         password: string;
     }
 
-    export type Output = {
-        id: string;
-        name: string;
-        email: string;
-        password: string;
-        createdAt: Date;
-    }
+    export type Output = UserOutput;
 
     export class UseCase {
         constructor(
