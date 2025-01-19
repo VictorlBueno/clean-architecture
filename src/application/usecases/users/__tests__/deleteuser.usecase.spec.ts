@@ -1,18 +1,18 @@
 import {
     UserInMemoryRepository,
 } from "@/infrastructure/repositories/database/in-memory/repositories/user-in-memory.repository";
-import {DeleteuserUseCase} from "@/application/usecases/users/deleteuser.usecase";
+import {DeleteUserUseCase} from "@/application/usecases/users/deleteUserUseCase";
 import {NotFoundError} from "@/domain/shared/errors/not-found-error";
 import {UserDataBuilder} from "@/domain/testing/helpers/user-data-builder";
 import {UserEntity} from "@/domain/entities/user.entity";
 
 describe("DeleteUserUseCase unit tests", () => {
-    let sut: DeleteuserUseCase.UseCase;
+    let sut: DeleteUserUseCase.UseCase;
     let repository: UserInMemoryRepository;
 
     beforeEach(() => {
         repository = new UserInMemoryRepository();
-        sut = new DeleteuserUseCase.UseCase(repository);
+        sut = new DeleteUserUseCase.UseCase(repository);
     });
 
     it("Should throws error when entity not found", async () => {
