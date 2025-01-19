@@ -11,9 +11,10 @@ import {ListUsersUsecase} from "@/application/usecases/users/listusers.usecase";
 import {UpdateUserUseCase} from "@/application/usecases/users/updateuser.usecase";
 import {UpdatePasswordUseCase} from "@/application/usecases/users/updatepassword.usecase";
 import {DeleteUserUseCase} from "@/application/usecases/users/deleteUserUseCase";
+import {UsersController} from "@/infrastructure/controllers/users.controller";
 
 @Module({
-    controllers: [],
+    controllers: [UsersController],
     providers: [
         {
             provide: "UserRepository", // nome a ser usado.
