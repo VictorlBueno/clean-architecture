@@ -1,4 +1,4 @@
-import {GetUserUsecase} from "@/application/usecases/users/getUserUsecase";
+import {GetUserUsecase} from "@/application/usecases/users/getuser.usecase";
 import {
     UserInMemoryRepository,
 } from "@/infrastructure/repositories/database/in-memory/repositories/user-in-memory.repository";
