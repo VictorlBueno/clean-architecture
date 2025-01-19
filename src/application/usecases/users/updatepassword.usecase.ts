@@ -30,7 +30,7 @@ export namespace UpdatePasswordUseCase {
             const checkOldPassword = await this.hashProvider.compareHash(input.oldPassword, entity.password);
 
             if (!checkOldPassword) {
-                throw new InvalidPasswordError("Old password does not maatch");
+                throw new InvalidPasswordError("Old password does not match");
             }
 
             const hashPassword = await this.hashProvider.generateHash(input.password);
