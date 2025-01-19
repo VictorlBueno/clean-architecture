@@ -3,8 +3,11 @@ import {UserEntity} from "@/domain/entities/user.entity";
 import {NotFoundError} from "@/domain/shared/errors/not-found-error";
 import {ConflictError} from "@/domain/shared/errors/conflict-error";
 import {InMemorySearchableRepository} from "@/domain/shared/repositories/in-memory-searchable.repository";
+import {SortDirection} from "@/domain/shared/repositories/searchable-repository-contracts";
 
-export class UserInMemoryRepository extends InMemorySearchableRepository<UserEntity> implements UserRepository {
+export class UserInMemoryRepository extends InMemorySearchableRepository<UserEntity> implements UserRepository.Repository {
+    sortableFields: string[] = ["name", "createdAt"];
+
     async emailExists(email: string): Promise<void> {
         const entity = this.items.find((item) => item.email === email);
 
@@ -21,5 +24,19 @@ export class UserInMemoryRepository extends InMemorySearchableRepository<UserEnt
         }
 
         return entity;
+    }
+
+    protected async applyFilter(items: UserEntity[], filter: UserRepository.Filter): Promise<UserEntity[]> {
+        if (!filter) return items;
+
+        return items.filter(item => {
+            return item.props.name.toLowerCase().includes(filter.toLowerCase());
+        });
+    }
+
+    protected async applySort(items: UserEntity[], sort: string | null, sortDir: SortDirection | null): Promise<UserEntity[]> {
+        return !sort
+            ? super.applySort(items, "createdAt", "desc")
+            : super.applySort(items, sort, sortDir);
     }
 }
