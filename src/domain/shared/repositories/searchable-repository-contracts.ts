@@ -21,8 +21,8 @@ export type SearchResultProps<E extends Entity, Filter> = {
     filter: Filter | null;
 }
 
-export class SearchParams {
-    constructor(props: SearchProps = {}) {
+export class SearchParams<Filter = string> {
+    constructor(props: SearchProps<Filter> = {}) {
         this.page = props.page;
         this.perPage = props.perPage;
         this.sort = props.sort;
@@ -88,15 +88,15 @@ export class SearchParams {
         this._sortDir = dir !== "asc" && dir !== "desc" ? "desc" : dir;
     }
 
-    protected _filter: string | null;
+    protected _filter: Filter | null;
 
-    get filter() {
+    get filter(): Filter | null {
         return this._filter;
     }
 
-    private set filter(value: string | null) {
+    private set filter(value: Filter | null) {
         this._filter =
-            value === null || value === undefined || value === "" ? null : `${value}`;
+            value === null || value === undefined || value === "" ? null : (`${value}` as any);
     }
 }
 
@@ -138,10 +138,10 @@ export class SearchResult<E extends Entity, Filter = string> {
 export interface SearchableRepositoryInterface<
     E extends Entity,
     Filter = string,
-    SearchInput = SearchParams,
+    SearchInput = SearchParams<Filter>,
     SearchOutput = SearchResult<E, Filter>,
 > extends RepositoryInterface<E> {
     sortableFields: string[];
 
-    search(props: SearchParams): Promise<SearchOutput>;
+    search(props: SearchParams<Filter>): Promise<SearchOutput>;
 }
