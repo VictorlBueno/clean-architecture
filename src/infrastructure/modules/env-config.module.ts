@@ -2,9 +2,10 @@ import {DynamicModule, Module} from "@nestjs/common";
 import {EnvConfigService} from "@/infrastructure/config/env/env-config.service";
 import {ConfigModule, ConfigModuleOptions} from "@nestjs/config";
 import {join} from "node:path";
+import { DatabaseModule } from './database.module';
 
 @Module({
-    imports: [ConfigModule],
+    imports: [ConfigModule, DatabaseModule],
     providers: [EnvConfigService],
     exports: [EnvConfigService]
 })

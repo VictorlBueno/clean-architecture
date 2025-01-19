@@ -1,4 +1,4 @@
-import {GetUserUsecase} from "@/application/usecases/users/getuser.usecase";
+import {GetUserUseCase} from "@/application/usecases/users/getUserUseCase";
 import {
     UserInMemoryRepository,
 } from "@/infrastructure/repositories/database/in-memory/repositories/user-in-memory.repository";
@@ -7,12 +7,12 @@ import {UserDataBuilder} from "@/domain/testing/helpers/user-data-builder";
 import {UserEntity} from "@/domain/entities/user.entity";
 
 describe("GetUserUseCase unit tests", () => {
-    let sut: GetUserUsecase.UseCase;
+    let sut: GetUserUseCase.UseCase;
     let repository: UserInMemoryRepository;
 
     beforeEach(() => {
         repository = new UserInMemoryRepository();
-        sut = new GetUserUsecase.UseCase(repository);
+        sut = new GetUserUseCase.UseCase(repository);
     });
 
     it("Should throws error when entity not found", async () => {

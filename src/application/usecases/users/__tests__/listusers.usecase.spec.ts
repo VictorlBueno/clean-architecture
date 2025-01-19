@@ -4,15 +4,15 @@ import {
 import {UserRepository} from "@/domain/repositories/user.repository";
 import {UserDataBuilder} from "@/domain/testing/helpers/user-data-builder";
 import {UserEntity} from "@/domain/entities/user.entity";
-import {ListUsersUsecase} from "@/application/usecases/users/listusers.usecase";
+import {ListUsersUseCase} from "@/application/usecases/users/listUsersUseCase";
 
 describe("ListUsersUseCase unit tests", () => {
-    let sut: ListUsersUsecase.UseCase;
+    let sut: ListUsersUseCase.UseCase;
     let repository: UserInMemoryRepository;
 
     beforeEach(() => {
         repository = new UserInMemoryRepository();
-        sut = new ListUsersUsecase.UseCase(repository);
+        sut = new ListUsersUseCase.UseCase(repository);
     });
 
     it("toOutput method", () => {

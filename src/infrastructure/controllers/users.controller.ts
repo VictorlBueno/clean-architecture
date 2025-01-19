@@ -1,16 +1,16 @@
 import {Body, Controller, Delete, Get, HttpCode, Inject, Param, Patch, Post, Put, Query} from "@nestjs/common";
-import {SignupDto} from "@/infrastructure/dtos/signup.dto";
-import {UpdateUserDto} from "@/infrastructure/dtos/update-user.dto";
+import {SignupDto} from "@/infrastructure/dtos/users/signup.dto";
+import {UpdateUserDto} from "@/infrastructure/dtos/users/update-user.dto";
 import {SignupUseCase} from "@/application/usecases/users/signup.usecase";
 import {SigninUseCase} from "@/application/usecases/users/signin.usecase";
 import {UpdatePasswordUseCase} from "@/application/usecases/users/updatepassword.usecase";
 import {UpdateUserUseCase} from "@/application/usecases/users/updateuser.usecase";
 import {DeleteUserUseCase} from "@/application/usecases/users/deleteUserUseCase";
-import {ListUsersUsecase} from "@/application/usecases/users/listusers.usecase";
-import {GetUserUsecase} from "@/application/usecases/users/getuser.usecase";
-import {SigninDto} from "@/infrastructure/dtos/signin.dto";
-import {ListUsersDto} from "@/infrastructure/dtos/list-users.dto";
-import {UpdatePasswordDto} from "@/infrastructure/dtos/update-password.dto";
+import {SigninDto} from "@/infrastructure/dtos/users/signin.dto";
+import {ListUsersDto} from "@/infrastructure/dtos/users/list-users.dto";
+import {UpdatePasswordDto} from "@/infrastructure/dtos/users/update-password.dto";
+import {GetUserUseCase} from "@/application/usecases/users/getUserUseCase";
+import {ListUsersUseCase} from "@/application/usecases/users/listUsersUseCase";
 
 @Controller("users")
 export class UsersController {
@@ -29,11 +29,11 @@ export class UsersController {
     @Inject(DeleteUserUseCase.UseCase)
     private deleteUserUseCase: DeleteUserUseCase.UseCase;
 
-    @Inject(GetUserUsecase.UseCase)
-    private getUserUsecase: GetUserUsecase.UseCase;
+    @Inject(GetUserUseCase.UseCase)
+    private getUserUseCase: GetUserUseCase.UseCase;
 
-    @Inject(ListUsersUsecase.UseCase)
-    private listUsersUsecase: ListUsersUsecase.UseCase;
+    @Inject(ListUsersUseCase.UseCase)
+    private listUsersUseCase: ListUsersUseCase.UseCase;
 
     @Post()
     async create(@Body() signupDto: SignupDto) {
@@ -48,12 +48,12 @@ export class UsersController {
 
     @Get()
     async search(@Query() searchParams: ListUsersDto) {
-        return this.listUsersUsecase.execute(searchParams);
+        return this.listUsersUseCase.execute(searchParams);
     }
 
     @Get(":id")
     async findOne(@Param("id") id: string) {
-        return this.getUserUsecase.execute({id});
+        return this.getUserUseCase.execute({id});
     }
 
     @Put(":id")
@@ -61,9 +61,11 @@ export class UsersController {
         return this.updateUserUseCase.execute({id, ...updateUserDto});
     }
 
-
     @Patch(":id")
-    async updatePassword(@Param("id") id: string, @Body() updatePasswordDto: UpdatePasswordDto) {
+    async updatePassword(
+        @Param("id") id: string,
+        @Body() updatePasswordDto: UpdatePasswordDto,
+    ) {
         return this.updatePasswordUseCase.execute({id, ...updatePasswordDto});
     }
 

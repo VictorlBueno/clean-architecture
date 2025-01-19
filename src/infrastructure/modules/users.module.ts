@@ -6,8 +6,8 @@ import {
 import {BcryptjsHashProvider} from "@/infrastructure/providers/hash-provider/bcryptjs-hash.provider";
 import {UserRepository} from "@/domain/repositories/user.repository";
 import {SigninUseCase} from "@/application/usecases/users/signin.usecase";
-import {GetUserUsecase} from "@/application/usecases/users/getuser.usecase";
-import {ListUsersUsecase} from "@/application/usecases/users/listusers.usecase";
+import {GetUserUseCase} from "@/application/usecases/users/getUserUseCase";
+import {ListUsersUseCase} from "@/application/usecases/users/listUsersUseCase";
 import {UpdateUserUseCase} from "@/application/usecases/users/updateuser.usecase";
 import {UpdatePasswordUseCase} from "@/application/usecases/users/updatepassword.usecase";
 import {DeleteUserUseCase} from "@/application/usecases/users/deleteUserUseCase";
@@ -45,20 +45,20 @@ import {UsersController} from "@/infrastructure/controllers/users.controller";
             inject: ["UserRepository", "HashProvider"],
         },
         {
-            provide: GetUserUsecase.UseCase,
+            provide: GetUserUseCase.UseCase,
             useFactory: (
                 userRepository: UserRepository.Repository,
             ) => {
-                return new GetUserUsecase.UseCase(userRepository);
+                return new GetUserUseCase.UseCase(userRepository);
             },
             inject: ["UserRepository"],
         },
         {
-            provide: ListUsersUsecase.UseCase,
+            provide: ListUsersUseCase.UseCase,
             useFactory: (
                 userRepository: UserRepository.Repository,
             ) => {
-                return new ListUsersUsecase.UseCase(userRepository);
+                return new ListUsersUseCase.UseCase(userRepository);
             },
             inject: ["UserRepository"],
         },
