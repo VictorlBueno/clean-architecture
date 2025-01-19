@@ -8,7 +8,7 @@ import {UserDataBuilder} from "@/domain/testing/helpers/user-data-builder";
 import {BadRequestError} from "@/application/errors/bad-request-error";
 import {ConflictError} from "@/domain/shared/errors/conflict-error";
 
-describe("UserInMemoryRepository unit tests", () => {
+describe("SignupUseCase unit tests", () => {
     let sut: SignupUseCase.UseCase;
     let repository: UserInMemoryRepository;
     let hashProvider: HashProvider;
