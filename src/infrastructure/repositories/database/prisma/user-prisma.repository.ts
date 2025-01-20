@@ -31,8 +31,10 @@ export class UserPrismaRepository implements UserRepository.Repository {
         return this._get(id);
     }
 
-    insert(entity: UserEntity): Promise<void> {
-        return Promise.resolve(undefined);
+    async insert(entity: UserEntity): Promise<void> {
+        await this.prismaService.user.create({
+            data: entity.toJSON(),
+        })
     }
 
     search(props: SearchParams<UserRepository.Filter>): Promise<UserRepository.SearchResult> {
